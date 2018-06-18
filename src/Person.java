@@ -1,38 +1,23 @@
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 class Person
 {
-	private final int ID;
+	private int id;
 	private String lastname;
 	private String firstname;
 	private String nameExtension;
 	private String middlename;
 	private LocalDate birthday;
-	private String sex;
+	private String gender;
 
-	public Person(int i, String ln, String fn, String ne, String mn, LocalDate date, String s) {
-		ID = i;
-		lastname = ln.toUpperCase();
-		firstname = fn.toUpperCase();
-		nameExtension = ne.toUpperCase();
-		middlename = mn.toUpperCase();
-		birthday = date;
-		sex = s;
+	public int getId() {
+		return(id);
 	}
 
-	public Person(int i, String ln, String fn, String mn, LocalDate date, String s) {
-		ID = i;
-		lastname = ln.toUpperCase();
-		firstname = fn.toUpperCase();
-		nameExtension = null;
-		middlename = mn.toUpperCase();
-		birthday = date;
-		sex = s.toUpperCase();
-	}
-
-	public int getID() {
-		return(ID);
+	public void setId(int n) {
+		id = n;
 	}
 
 	public String getLastname() {
@@ -40,7 +25,7 @@ class Person
 	}
 
 	public void setLastname(String ln) {
-		lastname = ln;
+		lastname = ln.toUpperCase();
 	}
 
 	public String getFirstname() {
@@ -48,15 +33,20 @@ class Person
 	}
 
 	public void setFirstname(String fn) {
-		firstname = fn;
+		firstname = fn.toUpperCase();
 	}
 
 	public String getNameExtension() {
 		return(nameExtension);
 	}
 
-	public void setNameExtenstion(String ne) {
-		nameExtension = ne;
+	public void setNameExtension(String ne) {
+		if(ne != null) {
+			nameExtension = ne.toUpperCase().replace(".", "");
+		}
+		else {
+			nameExtension = ne;
+		}
 	}
 
 	public String getMiddlename() {
@@ -64,7 +54,7 @@ class Person
 	}
 
 	public void setMiddlename(String mn) {
-		middlename = mn;
+		middlename = mn.toUpperCase();
 	}
 
 	public LocalDate getBirthday() {
@@ -75,11 +65,24 @@ class Person
 		birthday = date;
 	}
 
+	public String getGender() {
+		return(gender);
+	}
+
+	public void setGender(String sex) {
+		gender = sex.toUpperCase();
+	}
+
+	public String birthdayToString() {
+		DateTimeFormatter f = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
+		return(birthday.format(f));
+	}
+
 	public int getAge() {
 		return(Period.between(birthday, LocalDate.now()).getYears());
 	}
 
 	public String toString() {
-		return(lastname + " " + firstname + " " + (nameExtension != null ? nameExtension + " " : "") + middlename);
+		return(lastname + ", " + firstname + " " + (nameExtension != null ? nameExtension + ". " : "") + middlename);
 	}
 }
