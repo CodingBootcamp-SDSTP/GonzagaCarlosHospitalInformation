@@ -4,20 +4,32 @@ import java.time.format.DateTimeFormatter;
 
 class Person
 {
-	private int id;
+	final int ID;
 	private String lastname;
 	private String firstname;
 	private String nameExtension;
 	private String middlename;
 	private LocalDate birthday;
-	private String gender;
+	private Sex gender;
 
-	public int getId() {
-		return(id);
+	public Person(int id, String lastname, String firstname, String nameExtension, String middlename, LocalDate birthday, Sex sex) {
+		this.ID = id;
+		this.lastname = lastname.toUpperCase();
+		this.firstname = firstname.toUpperCase();
+		this.nameExtension = nameExtension.toUpperCase();
+		this.middlename = middlename.toUpperCase();
+		this.birthday = birthday;
+		this.gender = sex;
 	}
 
-	public void setId(int n) {
-		id = n;
+	public Person(int id, String lastname, String firstname, String middlename, LocalDate birthday, Sex sex) {
+		this.ID = id;
+		this.lastname = lastname.toUpperCase();
+		this.firstname = firstname.toUpperCase();
+		this.nameExtension = null;
+		this.middlename = middlename.toUpperCase();
+		this.birthday = birthday;
+		this.gender = sex;
 	}
 
 	public String getLastname() {
@@ -42,10 +54,10 @@ class Person
 
 	public void setNameExtension(String ne) {
 		if(ne != null) {
-			nameExtension = ne.toUpperCase().replace(".", "");
+			nameExtension = ne.toUpperCase();
 		}
 		else {
-			nameExtension = ne;
+			nameExtension = null;
 		}
 	}
 
@@ -65,12 +77,16 @@ class Person
 		birthday = date;
 	}
 
-	public String getGender() {
+	public Sex getGender() {
 		return(gender);
 	}
 
-	public void setGender(String sex) {
-		gender = sex.toUpperCase();
+	public void setGender(Sex sex) {
+		gender = sex;
+	}
+
+	public String genderToString() {
+		return(gender == Sex.M ? "Male" : "Female");
 	}
 
 	public String birthdayToString() {
@@ -83,6 +99,14 @@ class Person
 	}
 
 	public String toString() {
-		return(lastname + ", " + firstname + " " + (nameExtension != null ? nameExtension + ". " : "") + middlename);
+		String ext = nameExtension != null ? nameExtension + " ": "";
+		return(lastname + ", " + firstname + " " + ext + middlename);
+	}
+
+	public boolean matches(String str) {
+		if(lastname.contains(str) || firstname.contains(str) || middlename.contains(str)) {
+			return(true);
+		}
+		return(false);
 	}
 }

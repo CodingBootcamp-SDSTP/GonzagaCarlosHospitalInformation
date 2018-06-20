@@ -1,8 +1,8 @@
 class Room
 {
-	private final int ROOM_NUMBER;
-	private final String TYPE;
-	private final int BED_CAPACITY;
+	final int ROOM_NUMBER;
+	final String TYPE;
+	final int BED_CAPACITY;
 	private int numberOfOccupiedBeds;
 
 	public Room(int roomNumber, String type, int bedCapacity, int numberOfOccupiedBeds) {
@@ -10,18 +10,6 @@ class Room
 		TYPE = type;
 		BED_CAPACITY = bedCapacity;
 		this.numberOfOccupiedBeds = numberOfOccupiedBeds;
-	}
-
-	public int getRoomNumber() {
-		return(ROOM_NUMBER);
-	}
-
-	public String getType() {
-		return(TYPE);
-	}
-
-	public int getBedCapacity() {
-		return(BED_CAPACITY);
 	}
 
 	public int getNumberOccupiedBeds() {
