@@ -7,16 +7,16 @@ class Person
 	final int ID;
 	private String lastname;
 	private String firstname;
-	private String nameExtension;
+	private NameExtension nameExtension;
 	private String middlename;
 	private LocalDate birthday;
 	private Sex gender;
 
-	public Person(int id, String lastname, String firstname, String nameExtension, String middlename, LocalDate birthday, Sex sex) {
+	public Person(int id, String lastname, String firstname, NameExtension nameExtension, String middlename, LocalDate birthday, Sex sex) {
 		this.ID = id;
 		this.lastname = lastname.toUpperCase();
 		this.firstname = firstname.toUpperCase();
-		this.nameExtension = nameExtension.toUpperCase();
+		this.nameExtension = nameExtension;
 		this.middlename = middlename.toUpperCase();
 		this.birthday = birthday;
 		this.gender = sex;
@@ -49,12 +49,12 @@ class Person
 	}
 
 	public String getNameExtension() {
-		return(nameExtension);
+		return(nameExtension.getValue());
 	}
 
-	public void setNameExtension(String ne) {
+	public void setNameExtension(NameExtension ne) {
 		if(ne != null) {
-			nameExtension = ne.toUpperCase();
+			nameExtension = ne;
 		}
 		else {
 			nameExtension = null;
@@ -81,12 +81,12 @@ class Person
 		return(gender);
 	}
 
-	public void setGender(Sex sex) {
-		gender = sex;
+	public String getGenderValue() {
+		return(gender.getValue());
 	}
 
-	public String genderToString() {
-		return(gender == Sex.M ? "Male" : "Female");
+	public void setGender(Sex sex) {
+		gender = sex;
 	}
 
 	public String birthdayToString() {
@@ -99,7 +99,7 @@ class Person
 	}
 
 	public String toString() {
-		String ext = nameExtension != null ? nameExtension + " ": "";
+		String ext = nameExtension != null ? nameExtension.getValue() + " ": "";
 		return(lastname + ", " + firstname + " " + ext + middlename);
 	}
 
