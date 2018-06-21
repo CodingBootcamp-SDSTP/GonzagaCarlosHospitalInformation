@@ -50,14 +50,14 @@ class Confinement
 		this.room = room;
 	}
 
-	public String confinementPeriodToString() {
+	public String getConfinementPeriod() {
 		DateTimeFormatter f = DateTimeFormatter.ofPattern("MM-dd-yyyy hh:mm a");
 		String admission = admissionDateTime.format(f);
 		String discharge = dischargeDateTime != null ? dischargeDateTime.format(f) : "Present";
 		return(admission + " to " + discharge);
 	}
 
-	public String confinementDurationToString() {
+	public String getConfinementDuration() {
 		LocalDateTime datetime = dischargeDateTime != null ? dischargeDateTime : LocalDateTime.now();
 		long hours = Duration.between(admissionDateTime, datetime).toHours();
 		int days = (int)hours/24;

@@ -1,6 +1,6 @@
 public enum Sex
 {
-	F("Female"), M("Male"), U("Unknown");
+	F("FEMALE"), M("MALE"), U("UNKNOWN");
 
 	private String value;
 
