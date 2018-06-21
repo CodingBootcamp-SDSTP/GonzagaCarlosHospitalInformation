@@ -1,11 +1,12 @@
 class Room
 {
 	final int ROOM_NUMBER;
-	final String TYPE;
+	final RoomType TYPE;
 	final int BED_CAPACITY;
 	private int numberOfOccupiedBeds;
+	public enum RoomType { WARD, SEMI_PRIVATE, PRIVATE, ICU }
 
-	public Room(int roomNumber, String type, int bedCapacity, int numberOfOccupiedBeds) {
+	public Room(int roomNumber, RoomType type, int bedCapacity, int numberOfOccupiedBeds) {
 		ROOM_NUMBER = roomNumber;
 		TYPE = type;
 		BED_CAPACITY = bedCapacity;
